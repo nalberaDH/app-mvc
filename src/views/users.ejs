@@ -18,8 +18,9 @@
         <% for(let i = 0; i < allUsers.length; i++) {%>
             <li>
                 <p>
+                    <img src="img/person_default.jpg" alt="" width="200px" height="200px">
                     <a href="/user/<%= allUsers[i].id%>"><%= allUsers[i].name %></a>
-                    <a href="/edit/<%= allUsers[i].id%>">Edit</a>
+                    <a href="/edit/<%= allUsers[i].id%>"><button>Edit</button></a>
                 </p>
             </li>
         <%}%>
