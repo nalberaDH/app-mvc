@@ -23,7 +23,7 @@ app.use(routerMain);
 app.use(routerUser);
 
 app.use((req,res,next)=>{
-    res.status.apply(400).render(__dirname,'./views/not-found');
+    res.status(400).render(path.join(__dirname,'./views/not-found'));
 })
 app.listen(3001, () => console.log("Servidor escuchando en puerto 3001"));
 
