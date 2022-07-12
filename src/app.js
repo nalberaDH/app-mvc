@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname,'../public')));
 app.use(routerMain);
 app.use(routerUser);
 
+app.use((req,res,next)=>{
+    res.status.apply(400).render(__dirname,'./views/not-found');
+})
 app.listen(3001, () => console.log("Servidor escuchando en puerto 3001"));
 
 

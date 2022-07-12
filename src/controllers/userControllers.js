@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const path = require('path');
-const { all } = require('../routes/users');
+
 
 const jsonPath = path.join(__dirname,'../database/users.json');
 
@@ -47,6 +47,7 @@ const controller = {
     postUser: (req,res) =>{
         const newName = req.body.name;
         const newEmail = req.body.email;
+        const newImg = req.file ? req.file.filename : "";
 
         const id = allUsers[allUsers.length - 1].id;
         const newId = id + 1;
@@ -55,6 +56,7 @@ const controller = {
             id: newId,
             name: newName,
             email: newEmail,
+            img: newImg,
         }
         allUsers.push(obj);
         
@@ -96,6 +98,21 @@ const controller = {
                 res.redirect('/users');
             }
         })       
+    },
+
+    delete: (req,res)=>{
+        //const { id } = req.params
+        const id = req.params.id;
+        const users = allUsers.filter(e => e.id != parseInt(id));
+
+        fs.writeFile(jsonPath,JSON.stringify(users), (error)=>{
+            if(error){
+                res.send("Error " + error);
+            }else{
+                res.redirect('/users');
+            }
+        });
+
     }
 };
 

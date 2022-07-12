@@ -18,9 +18,16 @@
         <% for(let i = 0; i < allUsers.length; i++) {%>
             <li>
                 <p>
-                    <img src="img/person_default.jpg" alt="" width="200px" height="200px">
+                    <% if(!allUsers[i].img){%>
+                        <img src="img/person_default.jpg" alt="" width="60px" height="60px">
+                    <%}else{%>
+                        <img src="img/<%= allUsers[i].img%>" alt="" width="60px" height="60px">
+                    <%}%>
                     <a href="/user/<%= allUsers[i].id%>"><%= allUsers[i].name %></a>
                     <a href="/edit/<%= allUsers[i].id%>"><button>Edit</button></a>
+                    <form action="/delete/<%= allUsers[i].id%>?_method=DELETE" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
                 </p>
             </li>
         <%}%>
